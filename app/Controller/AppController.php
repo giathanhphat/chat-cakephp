@@ -31,5 +31,33 @@ App::uses('Controller', 'Controller');
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
-     public $components = array('DebugKit.Toolbar', 'Session');
+     public $components = array(
+         'DebugKit.Toolbar', 'Session',
+        //  'Auth' => array(
+        //     //  'loginAction' => array(
+        //     //      'controller' => 'Users',
+        //     //      'action' => 'login'),
+        //     'authError' => 'Ban can phai dang nhap de tiep tuc',
+        //     'flash' => array(
+        //         'element' => 'default',
+        //         'key' => 'auth',
+        //         'params' => array('class' => 'alert alert-danger'),
+        //     ),
+        //     'loginRedirect' => 'index'
+        //  )
+          'Auth' => array(
+            'loginRedirect' => array(
+                'controller' => 'Users',
+                'action' => 'index'
+                ),
+            'loginAction' => array(
+                'controller' => 'Users',
+                'action' => 'login'),
+        )
+         );
+        public function beforeFilter(){
+		// cho phép tất cả các action nào trong mảng này đều có thể truy cập bởi các controller nào mà
+		// không càn phải đăng nhâp
+		$this->Auth->allow('register');
+	}
 }
