@@ -2,11 +2,11 @@
 class UsersController extends AppController{
 	public $name = 'Users';
 
-	public function beforeFilter(){
-		// gọi đến phương thức beforefFilter() của AppController.php
-		parent::beforeFilter();
-		$this->Auth->allow('login');
-	}
+	// public function beforeFilter(){
+	// 	// gọi đến phương thức beforefFilter() của AppController.php
+	// 	parent::beforeFilter();
+	// 	$this->Auth->allow('login');
+	// }
 
 	public function index()
 	{
@@ -36,7 +36,7 @@ class UsersController extends AppController{
 					$this->redirect('index');
 				}
 			
-		}
+		}	
 	}
 	public function login()
 	{
@@ -47,13 +47,15 @@ class UsersController extends AppController{
 		// Nếu mà chưa login thì cần login và lưu Session
 		if ($this->request->is('post')) {
 			debug($this->request->data);
-            if ($this->Auth->login($this->request->data)) { // Sau khi login thì lưu Session
+            if ($this->Auth->login()) { // Sau khi login thì lưu Session
                 //$this->Session->setFlash(__('Welcome, '. $this->Auth->user('username')));
                 return $this->redirect($this->Auth->redirectUrl());
             }
             
             $this->Session->setFlash(__('Invalid username or password'));            
         }
+		debug(1);
+		$this->render('login');
 	}
 
 

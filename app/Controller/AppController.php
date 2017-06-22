@@ -58,6 +58,6 @@ class AppController extends Controller {
         public function beforeFilter(){
 		// cho phép tất cả các action nào trong mảng này đều có thể truy cập bởi các controller nào mà
 		// không càn phải đăng nhâp
-		$this->Auth->allow('register');
+		$this->Auth->allow('register', 'logout');
 	}
 }
