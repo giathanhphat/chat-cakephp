@@ -4,20 +4,26 @@ class User extends AppModel{
     public $name = 'User';
     public $validate = array(
         'username' => array(
-            'nonEmpty' => array(
-                'rule' => array('notBlank'),
+            'notEmpty' => array(
+                'rule' => 'notBlank',
                 'message' => 'A username is required',
                 'allowEmpty' => false
             ),
-            'between' => array( 
-                'rule' => array('between', 1, 15), 
-                'required' => true, 
+            'limitCharacter' => array( 
+                'rule' => array('between', 5, 15), 
                 'message' => 'Usernames must be between 5 to 15 characters'
             ),
         ),
         'password' => array(
-            'rule' => 'notBlank',
-            'message' => 'Password khong duoc rong',
+            'lengthPassword' => array(
+                'rule' => array('minLength', 6),
+                'message' => 'Min Length of password is 6'
+            ),
+            'notEmpty' => array(
+                'rule' => 'notBlank',
+                'message' => 'A password is required',
+                'allowEmpty' => false
+        )
         ),
     );
      function beforeSave($option = array()){

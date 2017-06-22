@@ -33,7 +33,7 @@ class UsersController extends AppController{
 				}
 				else{
 					$this->Session->setFlash('Xảy ra lỗi');
-					$this->redirect('index');
+					// $this->redirect('index');
 				}
 			
 		}	
@@ -54,8 +54,6 @@ class UsersController extends AppController{
             
             $this->Session->setFlash(__('Invalid username or password'));            
         }
-		debug(1);
-		$this->render('login');
 	}
 
 
